@@ -1,0 +1,14 @@
+doctype html
+html
+  head
+    title
+      | Self Service | ZDN Enterprises, LLC
+    = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  body[class="#{body_class}"]
+    
+    .ui.container
+      h1 ZDN Enterprises, LLC &mdash; <small>Self Service</small>
+      = semantic_flash
+      = yield

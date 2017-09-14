@@ -1,0 +1,12 @@
+.ui.message.teal
+  .header
+    | Welcome to Client Self-Service!
+  p Please use this website to conduct online business with ZDN Enterprises,
+    LLC.
+p Find me in app/views/visitors/index.html.slim
+
+- if current_user
+  = link_to 'Logout', destroy_user_session_path, class: 'ui button red',
+    method: :delete
+- else
+  = link_to 'Login', new_user_session_path, class: 'ui button green'
