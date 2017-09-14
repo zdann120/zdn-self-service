@@ -1,11 +1,13 @@
 class AddressesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_address, only: [:show, :edit, :update, :destroy]
+  rescue_from Pundit::NotAuthorizedError, with: :not_authorized
 
   # GET /addresses
   # GET /addresses.json
   def index
     @addresses = Address.all.includes(:user)
+    authorize @addresses
   end
 
   # GET /addresses/1
@@ -16,6 +18,7 @@ class AddressesController < ApplicationController
   # GET /addresses/new
   def new
     @address = current_user.addresses.new
+    authorize @address
   end
 
   # GET /addresses/1/edit
@@ -26,6 +29,7 @@ class AddressesController < ApplicationController
   # POST /addresses.json
   def create
     @address = current_user.addresses.new(address_params)
+    authorize @address
 
     respond_to do |format|
       if @address.save
@@ -66,10 +70,15 @@ class AddressesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_address
       @address = Address.find(params[:id])
+      authorize @address
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def address_params
       params.require(:address).permit(:user_id, :nickname, :line1, :line2, :city, :state, :zip)
+    end
+
+    def not_authorized
+      redirect_to root_path, notice: "Sorry, you are not allowed to do that."
     end
 end
