@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :addresses
   get 'visitors/index'
   root to: 'visitors#index'
 

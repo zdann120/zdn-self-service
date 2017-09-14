@@ -3,4 +3,13 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+  has_many :addresses, dependent: :nullify
+
+  def default_address
+    Address.find(default_address_id)
+  end
+
+  def default_address=(address)
+    self.default_address_id = address.id
+  end
 end
