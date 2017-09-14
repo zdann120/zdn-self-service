@@ -5,6 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   has_many :addresses, dependent: :nullify
 
+  validates :first_name, :last_name, presence: true
+
   def default_address
     Address.find(default_address_id)
   end
