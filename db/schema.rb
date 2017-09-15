@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170914231818) do
+ActiveRecord::Schema.define(version: 20170915001959) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,33 @@ ActiveRecord::Schema.define(version: 20170914231818) do
     t.index ["verification_code"], name: "index_addresses_on_verification_code", unique: true
   end
 
+  create_table "invoices", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "address_id"
+    t.string "identifier"
+    t.string "token"
+    t.text "description"
+    t.date "send_date"
+    t.date "due_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["address_id"], name: "index_invoices_on_address_id"
+    t.index ["token"], name: "index_invoices_on_token", unique: true
+    t.index ["user_id"], name: "index_invoices_on_user_id"
+  end
+
+  create_table "line_items", force: :cascade do |t|
+    t.string "itemable_type"
+    t.bigint "itemable_id"
+    t.string "title"
+    t.integer "quantity"
+    t.string "unit_of_measure"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "unit_price_cents"
+    t.index ["itemable_type", "itemable_id"], name: "index_line_items_on_itemable_type_and_itemable_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -51,9 +78,12 @@ ActiveRecord::Schema.define(version: 20170914231818) do
     t.string "first_name"
     t.string "last_name"
     t.integer "default_address_id"
+    t.integer "role"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "addresses", "users"
+  add_foreign_key "invoices", "addresses"
+  add_foreign_key "invoices", "users"
 end

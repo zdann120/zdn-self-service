@@ -1,0 +1,23 @@
+h1 Listing invoices
+
+table.ui.celled.table
+  thead
+    tr
+      th User
+      th Address
+      th Send date
+      th Due date
+      th
+
+  tbody
+    - @invoices.each do |invoice|
+      tr
+        td = invoice.user
+        td = invoice.address
+        td = invoice.send_date
+        td = invoice.due_date
+        td = link_to 'Show', invoice
+
+br
+
+= link_to 'New Invoice', new_invoice_path

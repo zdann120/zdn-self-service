@@ -6,6 +6,10 @@ class Address < ApplicationRecord
 
   validates :line1, :city, :state, :zip, presence: true
 
+  def to_s
+    nickname
+  end
+
   def verify
     return false unless verification_result.blank?
     smarty_streets_verify

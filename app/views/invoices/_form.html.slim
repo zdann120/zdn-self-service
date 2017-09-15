@@ -1,0 +1,18 @@
+= simple_form_for(@invoice) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.association :user
+    = f.association :address
+    = f.input :identifier
+    = f.input :description
+    = f.input :send_date
+    = f.input :due_date
+  h2 First Line Items
+  - @invoice.line_items.build unless @invoice.line_items.any?
+  = f.simple_fields_for :line_items do |li|
+    = li.input :title
+    = li.input :unit_price, as: :decimal
+
+  .form-actions
+    = f.button :submit

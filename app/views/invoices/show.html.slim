@@ -1,0 +1,27 @@
+p#notice = notice
+
+p
+  strong User:
+  = @invoice.user
+p
+  strong Address:
+  = @invoice.address
+p
+  strong Identifier:
+  = @invoice.identifier
+p
+  strong Token:
+  = @invoice.token
+p
+  strong Description:
+  = @invoice.description
+p
+  strong Send date:
+  = @invoice.send_date
+p
+  strong Due date:
+  = @invoice.due_date
+
+= link_to 'Edit', edit_invoice_path(@invoice)
+'  |
+= link_to 'Back', invoices_path
