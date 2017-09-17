@@ -1,4 +1,5 @@
 class Address < ApplicationRecord
+  before_create :set_verification_code
   after_create :set_default_if_first_address
   after_create :verify
   belongs_to :user
@@ -52,6 +53,13 @@ class Address < ApplicationRecord
     if user.addresses.count == 1
       user.default_address = self
       user.save!
+    end
+  end
+
+  def set_verification_code
+    self.verification_code = loop do
+      ulid = ULID.generate
+      break ulid unless Address.exists?(verification_code: ulid)
     end
   end
 

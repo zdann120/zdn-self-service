@@ -28,6 +28,8 @@ class UserDashboard < Administrate::BaseDashboard
     last_name: Field::String,
     default_address_id: Field::Number,
     role: Field::String.with_options(searchable: false),
+    password: Field::Password,
+    password_confirmation: Field::Password,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -45,13 +47,8 @@ class UserDashboard < Administrate::BaseDashboard
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
-    :addresses,
-    :invoices,
-    :appointments,
     :id,
     :email,
-    :encrypted_password,
-    :reset_password_token,
     :reset_password_sent_at,
     :remember_created_at,
     :sign_in_count,
@@ -65,35 +62,28 @@ class UserDashboard < Administrate::BaseDashboard
     :last_name,
     :default_address_id,
     :role,
+    :addresses,
+    :invoices,
+    :appointments,
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
-    :addresses,
-    :invoices,
-    :appointments,
     :email,
-    :encrypted_password,
-    :reset_password_token,
-    :reset_password_sent_at,
-    :remember_created_at,
-    :sign_in_count,
-    :current_sign_in_at,
-    :last_sign_in_at,
-    :current_sign_in_ip,
-    :last_sign_in_ip,
     :first_name,
     :last_name,
     :default_address_id,
     :role,
+    :password,
+    :password_confirmation
   ].freeze
 
   # Overwrite this method to customize how users are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(user)
-  #   "User ##{user.id}"
-  # end
+  def display_resource(user)
+    "#{user.last_name}, #{user.first_name}"
+  end
 end

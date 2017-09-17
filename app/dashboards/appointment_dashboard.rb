@@ -27,7 +27,6 @@ class AppointmentDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :user,
     :id,
-    :token,
     :canceled,
   ].freeze
 
@@ -35,7 +34,6 @@ class AppointmentDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
     :user,
-    :id,
     :token,
     :canceled,
     :description,
@@ -50,7 +48,6 @@ class AppointmentDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
     :user,
-    :token,
     :canceled,
     :description,
     :starts_at,
@@ -60,7 +57,7 @@ class AppointmentDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how appointments are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(appointment)
-  #   "Appointment ##{appointment.id}"
-  # end
+  def display_resource(appointment)
+    "Appointment ##{appointment.token[0..8]}..."
+  end
 end

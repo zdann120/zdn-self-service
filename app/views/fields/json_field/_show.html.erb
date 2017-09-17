@@ -1,0 +1,10 @@
+<pre><%= raw([field.data['delivery_line_1'], field.data['delivery_line_2'], field.data['last_line']].join(", ")) %></pre>
+<ul>
+  <% field.data['analysis'].each do |key, value| %>
+    <li><%= raw "<strong>#{key}</strong> -> #{value}" %></li>
+  <% end %>
+  <hr />
+  <% field.data['components'].each do |key, value| %>
+    <li><%= raw "<strong>#{key}</strong> -> #{value}" %></li>
+  <% end %>
+</ul>

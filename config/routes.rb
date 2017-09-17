@@ -5,7 +5,6 @@ Rails.application.routes.draw do
     resources :appointments
     resources :invoices
     resources :line_items
-
     root to: "users#index"
   end
 

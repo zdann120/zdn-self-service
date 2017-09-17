@@ -22,7 +22,7 @@ class AddressDashboard < Administrate::BaseDashboard
     phone_number: Field::String,
     verification_code: Field::String,
     verified: Field::Boolean,
-    verification_result: Field::String.with_options(searchable: false),
+    verification_result: ::JsonField,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -33,7 +33,6 @@ class AddressDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :user,
     :id,
-    :token,
     :nickname,
   ].freeze
 
@@ -48,11 +47,11 @@ class AddressDashboard < Administrate::BaseDashboard
     :city,
     :state,
     :zip,
-    :created_at,
-    :updated_at,
     :phone_number,
     :verification_code,
+    :verification_result,
     :verified,
+    :updated_at,
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -60,7 +59,6 @@ class AddressDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
     :user,
-    :token,
     :nickname,
     :line1,
     :line2,
@@ -68,7 +66,6 @@ class AddressDashboard < Administrate::BaseDashboard
     :state,
     :zip,
     :phone_number,
-    :verification_code,
     :verified,
   ].freeze
 
