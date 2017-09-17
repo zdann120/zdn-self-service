@@ -69,6 +69,7 @@ class InvoicesController < ApplicationController
     user_id = params[:user_id]
     user = User.find(user_id)
     @addresses = user.addresses
+    authorize @addresses
     respond_to do |format|
       format.json { render json: @addresses }
     end

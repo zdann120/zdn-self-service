@@ -22,6 +22,11 @@ class AddressPolicy < ApplicationPolicy
   def create?
     true
   end
+
+  def populate_address_list?
+    user.try(:admin?)
+  end
+
   class Scope < Scope
     def resolve
       scope
