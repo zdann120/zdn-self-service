@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    resources :users
+    resources :addresses
+    resources :appointments
+    resources :invoices
+    resources :line_items
+
+    root to: "users#index"
+  end
+
   resources :appointments, only: [:index, :show]
   resources :invoices do
     resources :line_items
