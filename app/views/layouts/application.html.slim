@@ -5,7 +5,6 @@ html
       | Self Service | ZDN Enterprises, LLC
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   body[class="#{body_class}"]
     .ui.fixed.inverted.menu
       .ui.container
@@ -17,5 +16,7 @@ html
     br
     br
     .ui.container
-      = semantic_flash
+      = semantic_flash      
+    .ui.container.raised.very.padded.segment
       = yield
+  = render 'application/javascripts'

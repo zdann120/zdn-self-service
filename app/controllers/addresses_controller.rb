@@ -6,7 +6,7 @@ class AddressesController < ApplicationController
   # GET /addresses
   # GET /addresses.json
   def index
-    @addresses = Address.all.includes(:user)
+    @addresses = current_user.addresses
     authorize @addresses
   end
 
@@ -64,6 +64,12 @@ class AddressesController < ApplicationController
       format.html { redirect_to addresses_url, notice: 'Address was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def show_verification_result
+    @address = Address.find(params[:id])
+    authorize @address
+    @result = @address.verification_result
   end
 
   private

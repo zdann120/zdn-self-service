@@ -10,9 +10,73 @@
     = f.input :due_date
   h2 First Line Items
   - @invoice.line_items.build unless @invoice.line_items.any?
-  = f.simple_fields_for :line_items do |li|
-    = li.input :title
-    = li.input :unit_price, as: :decimal
+  table.ui.table
+    thead
+      tr
+        th Title
+        th Unit Price
+        th Quantity
+        th Unit of Measure
+        th Delete
+    tbody
+      = f.simple_fields_for :line_items do |li|
+        tr
+          td = li.input :title, label: false
+          td = li.input :unit_price, as: :decimal, label: false
+          td = li.input :quantity, label: false
+          td = li.input :unit_of_measure, label: false
+          td = li.input :_destroy, label: false, as: :radio_buttons
 
   .form-actions
     = f.button :submit
+//- content_for(:javascript) do
+  coffee:
+    $(document).ready ->
+      $("#invoice_user_id").on 'change', ->
+        $.ajax
+          url: "#{populate_address_list_invoices_path(@invoice)}"
+          type: 'GET'
+          data: user_id: $(this).val()
+          success: (data) ->
+            $('#invoice_address_id').children().remove()
+            return
+        return
+      return
+- content_for(:javascript) do
+  javascript:
+    $(document).ready(function() {
+      $("#invoice_user_id").on('change', function() {
+        $.ajax({
+          url:"#{populate_address_list_invoices_path}.json",
+          type:"GET",
+          data:{user_id: $(this).val()},
+          success: function(data) {
+          console.log(data);
+            $("#invoice_address_id").children().remove();
+            data.forEach(function(item) {
+              console.log(item);
+              $("#invoice_address_id").append(
+                "<option value=\""+ item.id +"\">" +item['nickname'] + "</option>"
+              );
+            })
+
+          }
+        })
+      })
+    });
+
+
+// javascript:
+  $(document).ready(function() {
+    $('#invoice_user_id').on('change', function() {
+      $ajax({
+        url: "#{populate_address_list_invoices_path}",
+        type: "GET",
+        data: {user_id: $(this).val()},
+        success: function(data) {
+          $("#invoice_address_id").children().remove();
+        }
+        // Callbacks that will be explained
+      });
+    });
+  });

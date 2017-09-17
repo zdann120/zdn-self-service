@@ -7,6 +7,10 @@ class AddressPolicy < ApplicationPolicy
     record.user == user
   end
 
+  def show_verification_result?
+    user.admin?
+  end
+
   def update?
     false
   end

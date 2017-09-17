@@ -65,6 +65,15 @@ class InvoicesController < ApplicationController
     end
   end
 
+  def populate_address_list
+    user_id = params[:user_id]
+    user = User.find(user_id)
+    @addresses = user.addresses
+    respond_to do |format|
+      format.json { render json: @addresses }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_invoice
@@ -75,7 +84,7 @@ class InvoicesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def invoice_params
       params.require(:invoice).permit(:user_id, :address_id, :identifier, :token, :description, :send_date, :due_date,
-                                     line_items_attributes: [:id, :title, :quantity, :unit_of_measure, :unit_price])
+                                     line_items_attributes: [:id, :title, :quantity, :unit_of_measure, :unit_price, :_destroy])
     end
 
     def not_authorized

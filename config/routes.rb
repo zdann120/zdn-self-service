@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
-  resources :invoices
-  resources :addresses
+  resources :invoices do
+    resources :line_items
+    get 'populate_address_list', to: 'invoices#populate_address_list', on: :collection
+  end
+  resources :addresses do
+    get 'result', on: :member, to: 'addresses#show_verification_result'
+  end
   get 'visitors/index'
   root to: 'visitors#index'
 

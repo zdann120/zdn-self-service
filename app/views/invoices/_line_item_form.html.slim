@@ -1,0 +1,9 @@
+= simple_form_for @invoice.line_items.new, 
+  url: invoice_line_items_path(@invoice),
+  remote: false do |f|
+
+  = f.input :title
+  = f.input :quantity
+  = f.input :unit_of_measure
+  = f.input :unit_price
+  = f.submit
