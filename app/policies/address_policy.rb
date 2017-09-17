@@ -4,7 +4,7 @@ class AddressPolicy < ApplicationPolicy
   end
 
   def show?
-    record.user == user
+    (record.user == user) || user.admin?
   end
 
   def show_verification_result?
