@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170916231708) do
+ActiveRecord::Schema.define(version: 20170917044055) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,19 @@ ActiveRecord::Schema.define(version: 20170916231708) do
     t.index ["token"], name: "index_addresses_on_token", unique: true
     t.index ["user_id"], name: "index_addresses_on_user_id"
     t.index ["verification_code"], name: "index_addresses_on_verification_code", unique: true
+  end
+
+  create_table "appointments", force: :cascade do |t|
+    t.string "token"
+    t.bigint "user_id"
+    t.boolean "canceled"
+    t.string "description"
+    t.datetime "starts_at"
+    t.integer "duration"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["token"], name: "index_appointments_on_token", unique: true
+    t.index ["user_id"], name: "index_appointments_on_user_id"
   end
 
   create_table "invoices", force: :cascade do |t|
@@ -86,6 +99,7 @@ ActiveRecord::Schema.define(version: 20170916231708) do
   end
 
   add_foreign_key "addresses", "users"
+  add_foreign_key "appointments", "users"
   add_foreign_key "invoices", "addresses"
   add_foreign_key "invoices", "users"
 end

@@ -7,6 +7,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   has_many :addresses, dependent: :nullify
   has_many :invoices
+  has_many :appointments
 
   validates :first_name, :last_name, presence: true
 

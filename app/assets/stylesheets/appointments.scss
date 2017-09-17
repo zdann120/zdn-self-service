@@ -1,0 +1,28 @@
+// Place all the styles related to the Appointments controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.appointments {
+  .calendar-heading {
+    text-align: center;
+  }
+  .has-events {
+    background-color: yellow;
+  }
+
+  .prev-month, .next-month {
+    background-color: grey;
+  }
+
+  .day {
+    max-width: 35px;
+  }
+
+  .past.current-month {
+    background-color: salmon;
+  }
+
+  .today {
+    background-color: green;
+    color: white;
+  }
+}

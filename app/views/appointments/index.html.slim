@@ -1,0 +1,14 @@
+h1 Your Upcoming Appointments
+.ui.message.blue <strong>Below is a list of your past and upcoming
+  appointments.</strong> Please let me know if you need to cancel.
+= month_calendar attribute: :starts_at, events: @appointments do |date, appts|
+  em = date.strftime("%b %d")
+  ul
+    - appts.each do |appt|
+      li
+        - if appt.canceled?
+          | <strike>
+        |[#{appt.starts_at.strftime("%l:%M %p").strip}] #{appt.description} - (#{appt.duration} min.)
+        - if appt.canceled?
+          | </strike>
+

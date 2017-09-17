@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :appointments, only: [:index]
   resources :invoices do
     resources :line_items
     get 'populate_address_list', to: 'invoices#populate_address_list', on: :collection
