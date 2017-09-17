@@ -41,7 +41,6 @@ class AddressDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
     :user,
-    :id,
     :token,
     :nickname,
     :line1,
@@ -54,7 +53,6 @@ class AddressDashboard < Administrate::BaseDashboard
     :phone_number,
     :verification_code,
     :verified,
-    :verification_result,
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -72,13 +70,12 @@ class AddressDashboard < Administrate::BaseDashboard
     :phone_number,
     :verification_code,
     :verified,
-    :verification_result,
   ].freeze
 
   # Overwrite this method to customize how addresses are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(address)
-  #   "Address ##{address.id}"
-  # end
+  def display_resource(address)
+    address.nickname
+  end
 end
