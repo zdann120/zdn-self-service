@@ -31,7 +31,7 @@ class InvoicesController < ApplicationController
     authorize @invoice
 
     respond_to do |format|
-      if @invoice.save
+      if @invoice.save!
         format.html { redirect_to @invoice, notice: 'Invoice was successfully created.' }
         format.json { render :show, status: :created, location: @invoice }
       else
