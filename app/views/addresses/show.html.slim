@@ -1,19 +1,15 @@
-.ui.raised.card.fluid
-  .content
-    .header = @address.nickname
-    .meta 
-      span.category = @address.token
-    .ui.divider
-    table.ui.table.very.basic.collapsing
-      tr
-        th User
-        td = @address.user.email
-      tr
-        th Address ID
-        td = @address.token
-      tr
-        th Verified Address
-        td = @address.validated_address
+.content
+  .header = @address.nickname
+  .meta 
+    span.category = @address.token
+  .ui.divider
+  table.ui.table.very.basic.collapsing
+    tr
+      th User
+      td = @address.user.email
+    tr
+      th Verified Address
+      td = simple_format @address.validated_address
 
 = link_to 'Back', addresses_path
 

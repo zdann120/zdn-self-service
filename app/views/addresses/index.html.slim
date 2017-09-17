@@ -3,26 +3,18 @@ h1 Listing addresses
 table.ui.celled.table
   thead
     tr
-      th Token
-      th User
       th Nickname
       th City
       th State
-      th
-      th
       th
 
   tbody
     - @addresses.each do |address|
       tr
-        td = address.token
-        td = address.user
         td = address.nickname
         td = address.city
         td = address.state
         td = link_to 'Show', address
-        td = link_to 'Edit', edit_address_path(address)
-        td = link_to 'Destroy', address, data: { confirm: 'Are you sure?' }, method: :delete
 
 br
 
