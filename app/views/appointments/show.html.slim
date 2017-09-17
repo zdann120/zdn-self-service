@@ -1,0 +1,14 @@
+h1 Appointment Detail
+table.ui.table.definition
+  tbody
+    tr
+      td Description
+      td = @appointment.description
+    tr
+      td Date / Time
+      td = @appointment.starts_at.strftime('%b %d, %Y %I:%m %p')
+    tr
+      td Duration
+      td 
+        |#{@appointment.duration} minutes 
+= link_to 'Go Back', appointments_path, class: 'ui button'

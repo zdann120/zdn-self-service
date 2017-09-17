@@ -8,7 +8,8 @@ h1 Your Upcoming Appointments
       li
         - if appt.canceled?
           | <strike>
-        |[#{appt.starts_at.strftime("%l:%M %p").strip}] #{appt.description} - (#{appt.duration} min.)
+        |[#{appt.starts_at.strftime("%l:%M %p").strip}] #{link_to appt.description, appointment_path(appt.token)}
         - if appt.canceled?
           | </strike>
+.ui.message.yellow All timezones are <em>America/Phoenix</em> (UTC -07:00).
 

@@ -27,7 +27,7 @@ class InvoicesController < ApplicationController
   # POST /invoices
   # POST /invoices.json
   def create
-    @invoice = current_user.invoices.new(invoice_params)
+    @invoice = invoices.new(invoice_params)
     authorize @invoice
 
     respond_to do |format|
