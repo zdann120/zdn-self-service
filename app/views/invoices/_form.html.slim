@@ -8,24 +8,25 @@
     = f.input :description
     = f.input :send_date
     = f.input :due_date
-  h2 First Line Items
-  - @invoice.line_items.build unless @invoice.line_items.any?
-  table.ui.table
-    thead
-      tr
-        th Title
-        th Unit Price
-        th Quantity
-        th Unit of Measure
-        th Delete
-    tbody
-      = f.simple_fields_for :line_items do |li|
+  - if @invoice.persisted?
+    h2 First Line Items
+    - @invoice.line_items.build unless @invoice.line_items.any?
+    table.ui.table
+      thead
         tr
-          td = li.input :title, label: false
-          td = li.input :unit_price, as: :decimal, label: false
-          td = li.input :quantity, label: false
-          td = li.input :unit_of_measure, label: false
-          td = li.input :_destroy, label: false, as: :radio_buttons
+          th Title
+          th Unit Price
+          th Quantity
+          th Unit of Measure
+          th Delete
+      tbody
+        = f.simple_fields_for :line_items do |li|
+          tr
+            td = li.input :title, label: false
+            td = li.input :unit_price, as: :decimal, label: false
+            td = li.input :quantity, label: false
+            td = li.input :unit_of_measure, label: false
+            td = li.input :_destroy, label: false, as: :radio_buttons
 
   .form-actions
     = f.button :submit
